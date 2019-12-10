@@ -256,6 +256,7 @@ class Genome:
             for gene in self.genes:
                 f.write(gene.get_fasta())
 
+    '''
     def read_genomic_fna(self, filename=None):  # TODO: document
         filename = filename if filename else self.files['genomic.fna']
         
@@ -267,6 +268,7 @@ class Genome:
         except FileNotFoundError:
             self.raised_errors = True
             self.log += 'Cannot get genomic.fna\n'
+    '''
     
     def set_nucleotide_sequences_to_genes(self):  # TODO: document
         for gene in self.genes:
