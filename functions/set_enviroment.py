@@ -6,6 +6,7 @@ def set_enviroment():
 
     Directory tree after work of the pipeline will look like this (except for .py files):
     .
+    ├── tmp - folder with temporary results, will be deleted upon completion 
     ├── cd_hit - folder with cd-hit results
     ├── data - folder where all the downloaded data will be saved
     │   ├── assembly_summary.txt - table with all organism assemblies from refseq
@@ -48,6 +49,7 @@ def set_enviroment():
         └── summary.txt - summary about results
 
     """
+    os.makedirs('tmp', exist_ok=True)
     os.makedirs('cd_hit', exist_ok=True)
     os.makedirs('data', exist_ok=True)
     os.makedirs('logs', exist_ok=True)
