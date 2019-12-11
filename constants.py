@@ -22,6 +22,6 @@ DOWNLOADING_LOG = './logs/downloading.log'
 PROTEOME_LOG = './logs/proteome.log'
 TOTAL_LIST_LOG = './logs/total_list.log'
 REFLESS_PROTEOME_LOG = './logs/proteome_refless.log'
-RESCUE_REFLESS_LOG = './logs/proteome_refless.log'
+RESCUE_REFLESS_LOG = './logs/rescue_refless.log'
 
 THRESHOLD = 90
