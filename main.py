@@ -14,7 +14,6 @@ set_enviroment()
 log = open(LOG_PATH, 'w', buffering=1)
 
 try:
-    '''
     log.write('Downloading genomes. More details in {}\n'.format(DOWNLOADING_LOG))
     download_genomes()
 
@@ -33,7 +32,6 @@ try:
     log.write('Making summary\n')
     make_summary()
     log.write('All done!')
-    '''
 
     # Remove temp file and /tmp files
     os.system('rm ./temp')
