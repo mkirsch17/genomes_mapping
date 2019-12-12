@@ -1,6 +1,6 @@
 # Genomes mapping
 
-Project for creating a total list of genes for a bacteria.
+Project for creating a total list of genes for a TEST.
 
 Pipeline can be run by downloading repository and executing *main.py* file. Before that, please download all the required 
 python packages:
