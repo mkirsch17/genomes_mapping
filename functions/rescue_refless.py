@@ -9,7 +9,6 @@ def rescue_refless():
 
     log.write('Generating BLAST database from reference genome\n')
 
-    '''
     # Generate BLAST database from reference genome
     os.system('makeblastdb -in %s%s/%s_protein.faa -dbtype prot -out %s' % (GENOMES_DIR, REF_GENOME_ID, REF_GENOME_ID, BLAST_DB_PATH))
 
@@ -17,7 +16,6 @@ def rescue_refless():
 
     # Perform BLAST search
     os.system('blastp -query %s -db %s -outfmt "6 qseqid sseqid pident qcovs" -max_target_seqs 1 > %s' % (REFLESS_PROTEOME_PATH, BLAST_DB_PATH, BLAST_RESULTS_PATH))
-    '''
 
     log.write('Parsing BLAST results\n')
 
@@ -33,13 +31,11 @@ def rescue_refless():
     protein_names_all = set(results_df.query_id.tolist()) 
     protein_names_stranded = list(protein_names_all.difference(protein_names_rescued))
 
-    '''
     log.write('Writing stranded proteins to %s\n' % STRANDED_LIST_PATH)
 
     # Write stranded proteins to file
     with open(STRANDED_LIST_PATH, 'w') as filename:
         filename.write('\n'.join(protein_names_stranded))
-    '''
 
     log.write('Writing rescued proteins to %s\n' % STRANDED_LIST_PATH)
 
