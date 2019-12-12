@@ -150,11 +150,11 @@ Information about the progress of this function is being written to *./logs/prot
 
 ## rescue_refless.py
 
-This function performs a BLAST search of all reference proteins back against the reference genome. A protein is considered "rescued" if both the percent identity AND coverage for a hit are equal to or greater than the set **THRESHOLD** constant. This is the same value used in *create_total_list_of_genes.py*.
+This function performs a BLAST search of all reference proteins back against the reference genome. A protein is considered "rescued" if both the percent identity AND coverage for a hit are equal to or greater than the set **THRESHOLD** constant. This is the same **THRESHOLD** value used in *create_total_list_of_genes.py*.
 
 After performing the BLAST search, this function will parse the results and output two files: one for proteins successfully rescued, and one for proteins failed to be rescued ("stranded" proteins). 
 
-The rescued proteins will be saved to *./results/rescued_list.csv*. This list contains the name of the rescued protein ("query_id" column) and the cluster that it belongs to (the cluster that its subject belongs to). Please note that the outputs of *create_total_of_genes.py* (e.g. *./results/clusters.csv*) are NOT modified by this script. In other words, the rescued proteins do not actually belong to these clusters according to the pipeline's outputs.
+The rescued proteins will be saved to *./results/rescued_list.csv*. This file contains the name of the rescued protein ("query_id" column) and the cluster that it belongs to (the cluster that its BLAST hit belongs to). Please note that the outputs of *create_total_of_genes.py* (e.g. *./results/clusters.csv*) are NOT modified by this script. In other words, the rescued proteins do not actually belong to these clusters according to the pipeline's outputs.
 
 The stranded proteins will be saved to *./results/stranded_list.txt*. This list is a simple text file containing the names of all proteins that were not successfully rescued.
 
