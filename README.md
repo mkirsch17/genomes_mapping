@@ -2,8 +2,7 @@
 
 Project for creating a total list of genes for a given **ORGANISM** (default: *E. coli*).
 
-Pipeline can be run by downloading repository and executing *main.py* file. Before that, please download all the required 
-python packages:
+Pipeline can be run by downloading the repository and executing the *main.py* file. Before that, please download all of the required python packages:
 * **numpy** – pipeline uses some arrays from numpy
 * **matplotlib** – plots
 * **seaborn** – plots
@@ -76,7 +75,7 @@ Directory tree after work of the pipeline will look like this (except for .py fi
 
 ## download_genomes.py
 Downloads *assembly_summary.txt* from NCBI ftp-site to *./data* folder. For example, for Escherichia coli the file will be downloaded from ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/Escherichia_coli/ . 
-If you want to use another organism, please set it's name to **ORGANISM** constant in *./constants.py*.
+If you want to use another organism, please set it's name to the **ORGANISM** constant in *./constants.py*. You must also update the **REF_GENOME_ID** constant with the name of this organism's reference genome.
 
 Then, only assemblies with **assembly_level** "Complete Genome" or "Chromosome" are selected. For each of them 
 the following files will be downloaded:
