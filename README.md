@@ -1,6 +1,6 @@
 # Genomes mapping
 
-Project for creating a total list of genes for a bacteria.
+Project for creating a total list of genes for a given **ORGANISM** (default: *E. coli*).
 
 Pipeline can be run by downloading repository and executing *main.py* file. Before that, please download all the required 
 python packages:
@@ -17,10 +17,12 @@ File main.py executes following scripts from *./functions/*:
 1. **set_enviroment.py**
 2. **create_proteome.py**
 3. **create_total_list_of_genes.py**
-4. **make_summary.py**
+4. **create_refless_proteome.py**
+5. **rescue_refless.py**
+6. **make_summary.py**
 
-All the steps, that take a lot of time have **tqdm** inside, so you can always see progress bar in your python console. 
-*main.py* writes result of it's work to a file *./logs/pipeline.log*. All the steps off the pipeline described below in details.
+All the steps that take a lot of time have **tqdm** inside, so you can always see a progress bar in your python console. 
+*main.py* writes result of it's work to a file *./logs/pipeline.log*. All the steps of the pipeline described below in details.
 
 ## set_enviroment.py
 
@@ -84,7 +86,7 @@ the following files will be downloaded:
 * **protein.gpff.gz** – protein sequence and annotation for each gene.
 Then all the files are extracted from their archives.
 
-Information about the work process of the function is being written to *./logs/downloading.log*.
+Information about the progress of this function is being written to *./logs/downloading.log*.
 
 ## create_proteome.py
 
@@ -107,7 +109,7 @@ WP_000002474.1[genome:GCF_002741575.1_ASM274157v1_]	MULTISPECIES: transcriptiona
 WP_000002542.1[genome:GCF_002741575.1_ASM274157v1_]	MULTISPECIES: S26 family signal peptidase [Enterobacteriaceae]
 ```
 
-Information about the work process of the function is being written to *./logs/proteome.log*
+Information about the progress of this function is being written to *./logs/proteome.log*
 
 ## create_total_list_of_genes.py
 
@@ -138,7 +140,25 @@ For example:
 
 3. Creates a total list of genes. It is the table with clusters in rows and genomes in columns. Number on the intersection means, how many genes from this cluster the genome contains. It is being saved in *./results/total_list.csv*
 
-Information about the work process of the function is being written to *./logs/total_list.log*
+Information about the progress of this function is being written to *./logs/total_list.log*
+
+## create_refless_proteome.py
+
+This function generates a proteome only containing all proteins that belong to clusters which lack any proteins from the reference genome (i.e. refless proteins). This file will be saved as a fasta file to *./results/proteome_refless.faa*. Please reference *create_proteome.py* documentation for more details on this file format.
+
+Information about the progress of this function is being written to *./logs/proteome_refless.log*
+
+## rescue_refless.py
+
+This function performs a BLAST search of all reference proteins back against the reference genome. A protein is considered "rescued" if both the percent identity AND coverage for a hit are equal to or greater than the set **THRESHOLD** constant. This is the same **THRESHOLD** value used in *create_total_list_of_genes.py*.
+
+After performing the BLAST search, this function will parse the results and output two files: one for proteins successfully rescued, and one for proteins failed to be rescued ("stranded" proteins). 
+
+The rescued proteins will be saved to *./results/rescued_list.csv*. This file contains the name of the rescued protein ("query_id" column) and the cluster that it belongs to (the cluster that its BLAST hit belongs to). Please note that the outputs of *create_total_of_genes.py* (e.g. *./results/clusters.csv*) are NOT modified by this script. In other words, the rescued proteins do not actually belong to these clusters according to the pipeline's outputs.
+
+The stranded proteins will be saved to *./results/stranded_list.txt*. This list is a simple text file containing the names of all proteins that were not successfully rescued.
+
+Information about the progress of this function is being written to *./logs/rescue_refless.log*
 
 ## make_summary.py
 
